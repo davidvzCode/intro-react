@@ -3,12 +3,21 @@ import { TodoContext } from '../TodoContext'
 import { CreateTodoButtom } from '../CreateTodoButton'
 import { TodoCounter } from '../TodoCounter'
 import { TodoItem } from '../TodoItem'
+import { TodoForm } from '../TodoForm'
 import { TodoSearch } from '../TodoSearch'
 import { TodoList } from '../TodoList'
+import { Modal } from '../Modal'
 
 function AppUI() {
-    const { error, loading, searchedTodos, completeTodo, deleteTodo } =
-        useContext(TodoContext)
+    const {
+        error,
+        loading,
+        searchedTodos,
+        completeTodo,
+        deleteTodo,
+        openModal,
+        setOpenModal,
+    } = useContext(TodoContext)
     return (
         <>
             <TodoCounter />
@@ -30,8 +39,13 @@ function AppUI() {
                     />
                 ))}
             </TodoList>
+            {openModal && (
+                <Modal>
+                    <TodoForm></TodoForm>
+                </Modal>
+            )}
 
-            <CreateTodoButtom />
+            <CreateTodoButtom setOpenModal={setOpenModal} />
         </>
     )
 }
